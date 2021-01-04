@@ -1,0 +1,12 @@
+<div>
+	<% if user_signed_in? %>
+		<%= link_to '動画を投稿する', new_lecture_path %>
+	<% end %>
+	<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+	<% @lectures.each do |lecture| %>
+		<% if lecture.image.attached? %>
+			<%= link_to image_tag(lecture.image), lecture_path(lecture) %>
+			<%= image_tag lecture.image %>
+		<% end %>
+	<% end %>
+</div>
