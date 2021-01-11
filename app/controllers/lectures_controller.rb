@@ -1,11 +1,13 @@
 class LecturesController < ApplicationController
+	before_action :search_lectures, only:[:search, :index]
+
 	def index
 		@lectures = Lecture.all
+		set_category_column
 	end
 
 	def new
 		@lecture = Lecture.new
-
 	end
 
 	def create
@@ -21,10 +23,36 @@ class LecturesController < ApplicationController
 		@lecture = Lecture.find(params[:id])
 	end
 
+	def edit
+		@lecture = Lecture.find(params[:id])
+	end
 
+	def update
+		@lecture = Lecture.find(params[:id])
+		@lecture.update(lectures_parameter)
+		redirect_to lecture_path
+	end
+
+	def destroy
+		@lecture = Lecture.find(params[:id])
+		@lecture.destroy
+		redirect_to root_path
+	end
+
+	def search
+		@lectures = @p.result.includes(:category)
+	end
 	private
 
 	def lectures_parameter
 		params.require(:lecture).permit(:title,:overview,:video,:image).merge(user_id: current_user.id)
+	end
+
+	def search_lectures
+		@p = Lecture.ransack(params[:q])
+	end
+
+	def set_category_column
+		@category_name = Category.select("name").distinct
 	end
 end

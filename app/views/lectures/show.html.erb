@@ -1,3 +1,22 @@
-<p>
-	動画詳細ページ
-</p>
+<div class="lecture">
+	<% if current_user.id == @lecture.user.id %>
+	  <div>
+		<%= link_to "編集する", edit_lecture_path(@lecture) %>
+		<%= link_to "削除する", lecture_path(@lecture), method: :delete %>
+	  </div>
+	<% end %>
+	<div class="title">
+		<%= @lecture.title %>
+	</div>
+	<div>
+		<%= @lecture.user.nickname %>
+	</div>
+
+	<div class="video">
+		<video src="<%= rails_blob_path(@lecture.video) %>" type="video/mp4" controls poster="<%= rails_blob_path(@lecture.image) %>"></video>
+	</div>
+
+	<div class="overview">
+		<%= @lecture.overview %>
+	</div>
+</div>
