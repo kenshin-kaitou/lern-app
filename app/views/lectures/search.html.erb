@@ -1,0 +1,13 @@
+検索結果
+  <% @results.each do |result| %>
+    <td>
+    <br>
+    <li>
+      <%= result.title %>
+      <%= result.image %>
+      <%= result.video %>
+      <%= result.overview %>
+      <%= result.category.name %>
+    </li>
+  <% end %>
+<%= link_to 'トップページへ戻る', root_path %>

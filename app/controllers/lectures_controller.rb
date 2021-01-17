@@ -12,6 +12,7 @@ class LecturesController < ApplicationController
 
 	def create
 		@lecture = Lecture.new(lectures_parameter)
+
 		if @lecture.save
 			redirect_to root_path
 		else
@@ -40,12 +41,12 @@ class LecturesController < ApplicationController
 	end
 
 	def search
-		@lectures = @p.result.includes(:category)
+		@results = @p.result.includes(:category)
 	end
 	private
 
 	def lectures_parameter
-		params.require(:lecture).permit(:title,:overview,:video,:image).merge(user_id: current_user.id)
+		params.require(:lecture).permit(:title,:overview,:video,:image,:category_id).merge(user_id: current_user.id)
 	end
 
 	def search_lectures
@@ -55,4 +56,5 @@ class LecturesController < ApplicationController
 	def set_category_column
 		@category_name = Category.select("name").distinct
 	end
+
 end
