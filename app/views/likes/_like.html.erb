@@ -1,0 +1,10 @@
+<% if Like.find_by(user_id: current_user.id, lecture_id: lecture.id) %>
+  <%= link_to "/lectures/#{lecture.id}/likes/#{like.id}", method: :delete, remote: true do %>
+    <i class="fas fa-heart"></i>
+  <% end %>
+<% else %>
+  <%= link_to "/lectures/#{lecture.id}/likes", method: :post, remote: true do %>
+  	<i class="far fa-heart"></i>
+  <% end %>
+<% end %>
+<%= lecture.likes.length %>

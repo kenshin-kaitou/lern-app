@@ -1,0 +1,2 @@
+console.log('ok');
+$("#like-<%= @lecture.id %>").html("<%= j(render partial: 'likes/like', locals: { lecture: @lecture, like: @like }) %>");
