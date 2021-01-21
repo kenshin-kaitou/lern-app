@@ -19,4 +19,7 @@
 	<div class="overview">
 		<%= @lecture.overview %>
 	</div>
+	<span id="like-<%= @lecture.id %>">
+  		<%= render partial: "likes/like", locals: { lecture: @lecture , like: @like } %>
+	</span>
 </div>

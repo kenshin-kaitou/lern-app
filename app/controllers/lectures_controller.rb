@@ -22,6 +22,7 @@ class LecturesController < ApplicationController
 
 	def show
 		@lecture = Lecture.find(params[:id])
+		@like = Like.find_by(user_id: current_user.id, lecture_id: @lecture.id)
 	end
 
 	def edit
