@@ -3,11 +3,7 @@
     <td>
     <br>
     <li>
-      <%= result.title %>
-      <%= result.image %>
-      <%= result.video %>
-      <%= result.overview %>
-      <%= result.category.name %>
+      <%= link_to image_tag(result.image), lecture_path(result) %>
     </li>
   <% end %>
 <%= link_to 'トップページへ戻る', root_path %>

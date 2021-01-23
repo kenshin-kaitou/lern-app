@@ -22,4 +22,20 @@
 	<span id="like-<%= @lecture.id %>">
   		<%= render partial: "likes/like", locals: { lecture: @lecture , like: @like } %>
 	</span>
+	<%= form_with model: [@lecture, @comment], id: "form" do |form| %>
+  		<%= form.text_field :text ,id: "content" %>
+  		<%= form.submit '投稿する' , id: "submit" %>
+	<% end %>
+	<div id="list">
+	</div>
+	<% @comments.each do |comment| %>
+  		<div class="comment">
+    		<div class="comment-date">
+      			投稿日時：<%= comment.created_at %>
+    		</div>
+    		<div class="post-content">
+      			<%= comment.text %>
+    		</div>
+  		</div>
+	<% end %>
 </div>
