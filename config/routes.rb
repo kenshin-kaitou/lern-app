@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root 'lectures#index'
   resources :lectures, only:[:new,:create,:show,:edit,:update,:destroy] do
     resources :likes, only: [:create, :destroy]
+    resources :comments, only:[:create]
   end
 end

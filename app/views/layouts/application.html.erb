@@ -4,12 +4,22 @@
     <title>LernApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= include_gon %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>  
+    <div>
+      <%= link_to 'learn_app', root_path %>
+      <% if user_signed_in? %>
+        <%= link_to '動画を投稿する', new_lecture_path %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'ログイン', new_user_session_path %>
+        <%= link_to '新規登録', new_user_registration_path %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

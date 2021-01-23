@@ -16,4 +16,5 @@ class User < ApplicationRecord
   has_many :lectures
   has_many :likes
   has_many :liked_lectures, through: :likes, source: :lecture
+  has_many :comments
 end

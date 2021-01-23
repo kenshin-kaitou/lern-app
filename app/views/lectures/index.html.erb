@@ -1,18 +1,11 @@
-<div>
-	<% if user_signed_in? %>
-		<%= link_to '動画を投稿する', new_lecture_path %>
-		<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-		<% @lectures.each do |lecture| %>
-			<% if lecture.image.attached? %>
-				<%= link_to image_tag(lecture.image), lecture_path(lecture) %>
-			<% end %>
-		<% end %>
-
-		<%= search_form_for @p, url: lectures_search_path do |f| %>
-			<%= f.label :category_name_eq, 'カテゴリーを選ぶ' %>
-			<%= f.collection_select :category_name_eq, @category_name, :name, :name,  include_blank: '指定なし' %>
-			<br>
-			<%= f.submit '検索' %>
-		<% end %>
+<%= search_form_for @p, url: lectures_search_path do |f| %>
+ <%= f.label :category_name_eq, 'カテゴリーを選ぶ' %>
+ <%= f.collection_select :category_name_eq, @category_name, :name, :name,  include_blank: '指定なし' %>
+ <br>
+ <%= f.submit '検索' %>
+<% end %>
+<% @lectures.each do |lecture| %>
+	<% if lecture.image.attached? %>
+		<%= link_to image_tag(lecture.image), lecture_path(lecture) %>
 	<% end %>
-</div>
+<% end %>

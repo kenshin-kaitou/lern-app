@@ -23,6 +23,9 @@ class LecturesController < ApplicationController
 	def show
 		@lecture = Lecture.find(params[:id])
 		@like = Like.find_by(user_id: current_user.id, lecture_id: @lecture.id)
+		@comment = Comment.new
+		@comments = @lecture.comments.includes(:user).order("id DESC")
+		gon.lecture = @lecture 
 	end
 
 	def edit
