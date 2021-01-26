@@ -1,9 +1,8 @@
 class LecturesController < ApplicationController
-	before_action :search_lectures, only:[:search, :index]
-
+	before_action :search_lectures
+	before_action :set_category_column
 	def index
 		@lectures = Lecture.all
-		set_category_column
 	end
 
 	def new
@@ -34,8 +33,11 @@ class LecturesController < ApplicationController
 
 	def update
 		@lecture = Lecture.find(params[:id])
-		@lecture.update(lectures_parameter)
-		redirect_to lecture_path
+		if @lecture.update(lectures_parameter)
+			redirect_to lecture_path
+		else
+			render :edit
+		end
 	end
 
 	def destroy

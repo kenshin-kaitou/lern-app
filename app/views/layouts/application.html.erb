@@ -9,7 +9,37 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>  
+  <body>
+    <header>
+      <div class="header-left">
+        <div class="header-list-icon">
+          <i class="fas fa-bars"></i>
+        </div>
+        <div class="header-logo">
+          <%= link_to "learn_app", root_path %>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="search-form">
+          <%= search_form_for @p, url: lectures_search_path do |f| %>
+            <%= f.label :category_name_eq, 'カテゴリーを選ぶ' %>
+            <%= f.collection_select :category_name_eq, @category_name, :name, :name,  include_blank: '指定なし' %>
+            <br>
+            <%= f.submit '検索' %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="user-logo">
+          <%# ユーザーのロゴの画像クリックでユーザーの管理機能のモーダルを表示させる %>
+          <p>user</p>
+        </div>
+      </div>
+    </header>
+
+    <%# UI調整中 ↑ %>  
     <div>
       <%= link_to 'learn_app', root_path %>
       <% if user_signed_in? %>
